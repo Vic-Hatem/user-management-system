@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel, EmailStr, Field
 from user import *
 
@@ -10,15 +9,15 @@ class LoginCredentials(BaseModel):
 
 class AuthenticationService:
     @staticmethod
-    def authenticate_user(self, email: str, password: str, users: dict[str,User]):
+    def authenticate_user(self, email: str, password: str, users: dict[str, User]):
         if email in users.keys():
             if users[email].passowrd == password:
                 return True
 
     @staticmethod
-    def authority_check(self,user: User):
+    def authority_check(self, user: User):
 
-        if isinstance(user,AdminUser):
+        if isinstance(user, AdminUser):
             return True
 
         return False

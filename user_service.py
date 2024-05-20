@@ -10,7 +10,7 @@ class UserCreation(IUserCreation):
             return False
 
         else:
-            users[user.email]=user
+            users[user.email] = user
             return True
 
 
@@ -40,11 +40,11 @@ class UserRetrieval(IUserRetrieval):
 
 class UserService:
 
-    def add(self,user, users):
+    def add(self, user, users):
         return UserCreation().create(user, users)
 
-    def update(self,user,new_user, users):
-        return UserProfileUpdate().update(user,new_user, users)
+    def update(self, user, new_user, users):
+        return UserProfileUpdate().update(user, new_user, users)
 
-    def retrieve(self,user, users):
+    def retrieve(self, user, users):
         return UserRetrieval().retrieve(user, users)

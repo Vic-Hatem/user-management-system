@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI, Depends, HTTPException, status
 from user_service import *
 from authenticator import *
@@ -17,7 +16,7 @@ def get_authentication_service():
     return AuthenticationService()
 
 
-user_service=get_user_service()
+user_service = get_user_service()
 
 
 @app.post("/login")
@@ -32,13 +31,11 @@ def login(credentials: LoginCredentials, auth_service: AuthenticationService = D
 
 @app.post("/user/{user}")
 def add_user(user):
-
     return user_service.add(user, users)
 
 
 @app.put("/user/{user}")
 def update_user(user, updated_user):
-
     return user_service.update(user, updated_user, users)
 
 
