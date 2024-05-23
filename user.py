@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field, EmailStr
-from user_service import *
 
 
 class User(BaseModel):

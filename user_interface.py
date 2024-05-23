@@ -1,29 +1,23 @@
 from abc import ABC, abstractmethod
-
-
-# Interface
-class IUserService(ABC):
-    @abstractmethod
-    def do_stuff(self):
-        pass
+from user import User
 
 
 # Interface
 class IUserCreation(ABC):
     @abstractmethod
-    def create(self, user, users):
+    def create(self, user: User, users):
         pass
 
 
 # Interface
 class IUserProfileUpdate(ABC):
     @abstractmethod
-    def update(self, user, new_user, users):
+    def update(self, user: User, new_user: User, users):
         pass
 
 
 # Interface
 class IUserRetrieval(ABC):
     @abstractmethod
-    def retrieve(self, user, users):
+    def retrieve(self, user: User, users):
         pass

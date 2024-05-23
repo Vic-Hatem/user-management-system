@@ -1,12 +1,12 @@
-from user_interface import *
-from user import *
+from user_interface import IUserRetrieval, IUserCreation, IUserProfileUpdate
+from user import User
 
 
 class UserCreation(IUserCreation):
 
-    def create(self, user, users):
-        if users[user.email]:
-            '''user already exists'''
+    def create(self, user: User, users):
+        if user.email in users:
+            # user already exists
             return False
 
         else:
@@ -16,12 +16,10 @@ class UserCreation(IUserCreation):
 
 class UserProfileUpdate(IUserProfileUpdate):
 
-    def update(self, user, new_user, users):
-        if not users[user.email]:
-            '''
-            user doesn't exist!
-            should we add a new user if the we want to update a user that doesnt exist?!
-            '''
+    def update(self, user: User, new_user: User, users):
+        if user.email not in users:
+            # user doesn't exist!
+            # should we add a new user if the we want to update a user that doesnt exist?!
             return False
         else:
             users[user.email] = new_user
@@ -30,21 +28,24 @@ class UserProfileUpdate(IUserProfileUpdate):
 
 class UserRetrieval(IUserRetrieval):
 
-    def retrieve(self, user, users):
-        if users[user.email]:
+    def retrieve(self, user: User, users):
+        if user.email in users:
             return users[user.email]
 
-        '''user doesnt exist'''
+        # user doesnt exist
         return None
 
 
 class UserService:
 
-    def add(self, user, users):
+    @staticmethod
+    def add(self, user: User, users):
         return UserCreation().create(user, users)
 
-    def update(self, user, new_user, users):
+    @staticmethod
+    def update(self, user: User, new_user: User, users):
         return UserProfileUpdate().update(user, new_user, users)
 
-    def retrieve(self, user, users):
+    @staticmethod
+    def retrieve(self, user: User, users):
         return UserRetrieval().retrieve(user, users)
