@@ -23,8 +23,8 @@ def login(credentials: LoginCredentials):
     )
 
 
-@app.post("/add_user/{user}")
-def add_user(user):
+@app.post("/add_user")
+def add_user(user:User):
     if user_service.add(user, users):
         return {"message": "User has been successfully!"}
     raise HTTPException(status_code=422, detail="Cannot add user, user already exist")

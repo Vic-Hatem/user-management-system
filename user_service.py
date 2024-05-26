@@ -6,9 +6,10 @@ from user import User
 
 class UserCreation(IUserCreation):
 
-    def create(self, user: User, users):
+    def create(self, user: User, users: dict):
 
-        user = json.loads(user)
+        user = json.loads(user.to_json())
+
         if user["email"] in users:
             # user already exists
             return False
@@ -20,9 +21,9 @@ class UserCreation(IUserCreation):
 
 class UserProfileUpdate(IUserProfileUpdate):
 
-    def update(self, user: User, new_user: User, users):
-        user = json.loads(user)
-        new_user = json.loads(new_user)
+    def update(self, user: User, new_user: User, users: dict):
+        user = json.loads(user.to_json())
+        new_user = json.loads(new_user.to_json())
         if user["email"] not in users:
             # user doesn't exist!
             # should we add a new user if the we want to update a user that doesnt exist?!
@@ -35,7 +36,7 @@ class UserProfileUpdate(IUserProfileUpdate):
 
 class UserRetrieval(IUserRetrieval):
 
-    def retrieve(self, user_email, users):
+    def retrieve(self, user_email: str, users: dict):
         if user_email in users:
             return users[user_email]
 
