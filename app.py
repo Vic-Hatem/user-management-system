@@ -24,23 +24,22 @@ def login(credentials: LoginCredentials):
 
 
 @app.post("/add_user")
-def add_user(user:User):
+def add_user(user: User):
     if user_service.add(user, users):
         return {"message": "User has been successfully!"}
     raise HTTPException(status_code=422, detail="Cannot add user, user already exist")
 
 
-@app.put("/update_user/{user}")
-def update_user(user, updated_user):
-    if user_service.update(user, updated_user, users):
+@app.put("/update_user")
+def update_user(user: User, new_user: User):
+    if user_service.update(user, new_user, users):
         return {"message": "Updated uccessfully"}
     raise HTTPException(status_code=404, detail="User not found")
 
 
 @app.get("/get_user")
-def retrieve_user(user_email):
+def retrieve_user(user_email: str):
     response = user_service.retrieve(user_email, users)
     if response is not None:
         return response
     raise HTTPException(status_code=404, detail="User not found")
-
