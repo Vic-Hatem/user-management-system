@@ -15,10 +15,10 @@ class LoginCredentials(BaseModel):
 
 
 class AuthenticationService:
-    @staticmethod
+
     def authenticate_user(self, email: str, password: str, users: dict[str, User]):
         if email in users:
-            if users[email].passowrd == password:
+            if users[email]["password"] == password:
                 return True
 
         return False

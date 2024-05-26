@@ -5,14 +5,17 @@ from user import User
 
 app = FastAPI()
 
-users = {}
+users = {"hatem@gmail.com": {"username": "hatem", "email": "hatem@gmail.com", "password": "000000000"}}
 
 user_service = get_user_service()
 
+auth_service = get_authentication_service()
+
 
 @app.post("/login")
-def login(credentials: LoginCredentials, auth_service: AuthenticationService = Depends(get_authentication_service)):
-    if auth_service.authenticate_user(credentials.email, credentials.password):
+def login(credentials: LoginCredentials):
+    print(credentials, type(credentials))
+    if auth_service.authenticate_user(credentials.email, credentials.password, users):
         return {"message": "User authenticated successfully!"}
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -20,20 +23,24 @@ def login(credentials: LoginCredentials, auth_service: AuthenticationService = D
     )
 
 
-@app.post("/user/{user}")
-def add_user(user: User = Depends(get_user_service)):
-    if get_authentication_service().AdminUserCheck().check_user(User):
-        return user_service.add(user, users)
-    return None
+@app.post("/add_user/{user}")
+def add_user(user):
+    if user_service.add(user, users):
+        return {"message": "User has been successfully!"}
+    raise HTTPException(status_code=422, detail="Cannot add user, user already exist")
 
 
-@app.put("/user/{user}")
-def update_user(user: User = Depends(get_user_service), updated_user: User = Depends(get_user_service)):
-    if get_authentication_service().AdminUserCheck().check_user(User):
-        return user_service.update(user, updated_user, users)
-    return None
+@app.put("/update_user/{user}")
+def update_user(user, updated_user):
+    if user_service.update(user, updated_user, users):
+        return {"message": "Updated uccessfully"}
+    raise HTTPException(status_code=404, detail="User not found")
 
 
-@app.get("/user/{user}")
-def retrieve_user(user: User = Depends(get_user_service)):
-    return user_service.retrieve(user, users)
+@app.get("/get_user")
+def retrieve_user(user_email):
+    response = user_service.retrieve(user_email, users)
+    if response is not None:
+        return response
+    raise HTTPException(status_code=404, detail="User not found")
+
