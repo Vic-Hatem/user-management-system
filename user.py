@@ -1,6 +1,6 @@
 import json
 
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class User(BaseModel):
@@ -8,14 +8,6 @@ class User(BaseModel):
     email: str
     password: str
 
-    def to_dict(self):
-        return {
-            'username': self.username,
-            'email': self.email,
-            'password': self.password,
-        }
-    def to_json(self):
-        return json.dumps(self.to_dict(), indent=3)
 
 class AdminUser(User):
     def user_type(self):
@@ -25,3 +17,8 @@ class AdminUser(User):
 class RegularUser(User):
     def user_type(self):
         return "Regular user type"
+
+
+class LoginCredentials(BaseModel):
+    email: EmailStr
+    password: str = Field(..., min_length=8, max_length=64)
