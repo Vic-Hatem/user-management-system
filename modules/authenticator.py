@@ -1,5 +1,5 @@
-from model.login_credintials import LoginCredentials
-from model.user import User, AdminUser, RegularUser
+from models.login_credintials import LoginCredentials
+from models.user import User, AdminUser, RegularUser
 from user_management_service.user_check_interface import UserCheck
 
 

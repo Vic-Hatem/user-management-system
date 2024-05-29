@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException, status
 
-from model.login_credintials import LoginCredentials
-from model.user import User
-from module.resources import get_user_service, get_authentication_service
+from models.login_credintials import LoginCredentials
+from models.user import User
+from modules.resources import get_user_service, get_authentication_service
 
 app = FastAPI()
 
@@ -36,7 +36,7 @@ def add_user(user: User):
 def update_user(user: User, new_user: User):
     response = get_user_service().update(user, new_user)
     if response:
-        return {"message": "Updated uccessfully"}
+        return {"message": "Updated successfully"}
     raise HTTPException(status_code=404, detail="User not found")
 
 

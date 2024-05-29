@@ -1,4 +1,4 @@
-from model.user import User
+from models.user import User
 from user_management_service.user_management_interface import IUserManagementService
 
 

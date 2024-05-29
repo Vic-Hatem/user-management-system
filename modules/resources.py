@@ -1,4 +1,4 @@
-from module.authenticator import AuthenticationService
+from modules.authenticator import AuthenticationService
 from user_management_service.user_management_interface import IUserManagementService
 from user_management_service.user_management_service_dict import UserManagementServiceDict
 

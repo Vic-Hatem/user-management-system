@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from model.user import User
+from models.user import User
 
 
 class IUserManagementService(ABC):
