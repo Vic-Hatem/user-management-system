@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException, status
 
-from resources import get_user_service, get_authentication_service
-from user import User, LoginCredentials
+from model.login_credintials import LoginCredentials
+from model.user import User
+from module.resources import get_user_service, get_authentication_service
 
 app = FastAPI()
 

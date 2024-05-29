@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from user import User
+from model.user import User
 
 
 class IUserManagementService(ABC):
@@ -18,10 +18,4 @@ class IUserManagementService(ABC):
 
     @abstractmethod
     def check_if_user_exists(self, user: User):
-        pass
-
-
-class UserCheck(ABC):
-    @abstractmethod
-    def check_user(self, user: User):
         pass

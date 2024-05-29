@@ -1,5 +1,5 @@
-from user import User
-from user_service_interface import IUserManagementService
+from model.user import User
+from user_management_service.user_management_interface import IUserManagementService
 
 
 def singleton(cls):
@@ -41,7 +41,7 @@ class UserManagementServiceDict(IUserManagementService):
 
         return False
 
-    def retrieve(self, user: User) -> User:
+    def retrieve(self, user: User) -> User | None:
         if self.check_if_user_exists(user):
             return self.users[user.email]
         return None

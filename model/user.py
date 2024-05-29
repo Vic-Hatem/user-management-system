@@ -1,6 +1,4 @@
-import json
-
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel
 
 
 class User(BaseModel):
@@ -17,8 +15,3 @@ class AdminUser(User):
 class RegularUser(User):
     def user_type(self):
         return "Regular user type"
-
-
-class LoginCredentials(BaseModel):
-    email: EmailStr
-    password: str = Field(..., min_length=8, max_length=64)
