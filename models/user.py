@@ -1,17 +1,24 @@
+from enum import Enum
+from typing import Optional
+
 from pydantic import BaseModel
+
+
+class UserType(Enum):
+    RegularUser = 1
+    AdminUser = 2
 
 
 class User(BaseModel):
     username: str
     email: str
     password: str
+    user_type: Optional[UserType] = None
 
 
 class AdminUser(User):
-    def user_type(self):
-        return "Admin user type"
+    user_type = UserType.AdminUser
 
 
 class RegularUser(User):
-    def user_type(self):
-        return "Regular user type"
+    user_type = UserType.RegularUser

@@ -13,7 +13,7 @@ class IUserManagementService(ABC):
         pass
 
     @abstractmethod
-    def retrieve(self, user: User):
+    def get(self, user: User):
         pass
 
     @abstractmethod

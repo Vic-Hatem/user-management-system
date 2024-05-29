@@ -9,3 +9,7 @@ def get_user_service() -> IUserManagementService:
 
 def get_authentication_service() -> AuthenticationService:
     return AuthenticationService()
+
+
+user_service = get_user_service()
+auth_service = get_authentication_service()

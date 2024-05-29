@@ -41,7 +41,7 @@ class UserManagementServiceDict(IUserManagementService):
 
         return False
 
-    def retrieve(self, user: User) -> User | None:
+    def get(self, user: User) -> User | None:
         if self.check_if_user_exists(user):
             return self.users[user.email]
         return None
