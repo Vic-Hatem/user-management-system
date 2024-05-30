@@ -1,5 +1,5 @@
+from abc import abstractmethod
 from enum import Enum
-from typing import Optional
 
 from pydantic import BaseModel
 
@@ -13,12 +13,18 @@ class User(BaseModel):
     username: str
     email: str
     password: str
-    user_type: Optional[UserType] = None
+
+    @property
+    @abstractmethod
+    def user_type(self) -> UserType:
+        pass
 
 
 class AdminUser(User):
-    user_type = UserType.AdminUser
+    def user_type(self) -> UserType:
+        return UserType.AdminUser
 
 
 class RegularUser(User):
-    user_type = UserType.RegularUser
+    def user_type(self) -> UserType:
+        return UserType.RegularUser
