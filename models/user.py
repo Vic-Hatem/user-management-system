@@ -21,10 +21,12 @@ class User(BaseModel):
 
 
 class AdminUser(User):
+    @property
     def user_type(self) -> UserType:
         return UserType.AdminUser
 
 
 class RegularUser(User):
+    @property
     def user_type(self) -> UserType:
         return UserType.RegularUser
